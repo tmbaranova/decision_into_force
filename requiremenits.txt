@@ -1,3 +1,0 @@
-request
-bs4
-eel
