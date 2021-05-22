@@ -50,7 +50,8 @@ def get_content(html):
     for month in all_months:
         try:
             weekends_in_month = list()
-            month_name = month.find('th', colspan='7', class_='month').get_text()
+            month_name = month.find('th', colspan='7',
+                                    class_='month').get_text()
             weekends = month.find('tbody')
             hol = weekends.find_all('td', class_='weekend')
             for weekend in hol:
@@ -65,40 +66,40 @@ def get_content(html):
 def dict_update(weekends_dict):
     """Функция перевода словаря с выходными в список
     с номерами выходных дней, считая от начала года"""
-    lst_weekends = []
-    for i in weekends_dict:
-        for j in weekends_dict[i]:
-            a = int(dict_month[i])+int(j)
-            lst_weekends.append(a)
-    return lst_weekends
+    lst_weekend_numbers = []
+    for month in weekends_dict:
+        for weekend in weekends_dict[month]:
+            weekend_number = int(dict_month[month])+int(weekend)
+            lst_weekend_numbers.append(weekend_number)
+    return lst_weekend_numbers
 
 
 def data_vstupl(data, lst_weeks):
     """Функиця расчета даты вступления решения в силу
     по дате решения и списку выходных и праздничных дней"""
     dat = datetime.datetime.strptime(data, '%Y-%m-%d')
-    d = int(dat.strftime("%j"))
+    date_int = int(dat.strftime("%j"))
     year = int(dat.year)
     days_in_year = 365
     if year in [2012, 2016, 2020, 2024, 2028, 2032]:
         days_in_year = 366
     counter = 0
     while counter <= 15:
-        d += 1
-        if d > days_in_year:
+        date_int += 1
+        if date_int > days_in_year:
             """СЮДА ПАРСИНГ СЛЕДУЮЩЕГО ГОДА"""
-            d = d % 365
+            date_int = date_int % 365
             year += 1
             url = get_url(year)
             html = get_html(url)
             content = get_content(html)
             lst_weeks = dict_update(content)
 
-        if d not in lst_weeks:
+        if date_int not in lst_weeks:
             counter += 1
-    d = str(d)
-    d = f'{datetime.datetime.strptime(d,"%j").strftime("%d.%m")}.{year}'
-    return d
+    date_str = str(date_int)
+    force_date = f'{datetime.datetime.strptime(date_str,"%j").strftime("%d.%m")}.{year}'
+    return force_date
 
 
 def convert_value(decision_date):
@@ -106,9 +107,9 @@ def convert_value(decision_date):
     url = get_url(year)
     html = get_html(url)
     content = get_content(html)
-    dict = dict_update(content)
-    a = (data_vstupl(decision_date, dict))
-    return a
+    lst_weekend_numbers = dict_update(content)
+    force_date = (data_vstupl(decision_date, lst_weekend_numbers))
+    return force_date
 
 
 
