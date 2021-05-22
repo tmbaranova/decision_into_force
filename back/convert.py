@@ -19,8 +19,8 @@ dict_month = {
 
 
 def get_year(data):
-    d = datetime.datetime.strptime(data, '%Y-%m-%d')
-    year = d.year
+    date_string = datetime.datetime.strptime(data, '%Y-%m-%d')
+    year = date_string.year
     return year
 
 
@@ -37,37 +37,37 @@ def get_html(url):
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
     }
-    r = requests.get(url, headers=HEADERS)
-    return r.text
+    request = requests.get(url, headers=HEADERS)
+    return request.text
 
 
 def get_content(html):
     """Парсер календаря"""
     soup = BeautifulSoup(html, 'html.parser')
-    months = soup.find_all('div', class_="col-md-3")
-    dict = {}
+    all_months = soup.find_all('div', class_="col-md-3")
+    weekends_dict = {}
 
-    for month in months:
+    for month in all_months:
         try:
-            lst_w = list()
-            m = month.find('th', colspan='7', class_='month').get_text()
+            weekends_in_month = list()
+            month_name = month.find('th', colspan='7', class_='month').get_text()
             weekends = month.find('tbody')
             hol = weekends.find_all('td', class_='weekend')
-            for w in hol:
-                w = w.get_text()
-                lst_w.append(w)
-            dict.update({m: lst_w})
+            for weekend in hol:
+                weekend = weekend.get_text()
+                weekends_in_month.append(weekend)
+            weekends_dict.update({month_name: weekends_in_month})
         except Exception:
             continue
-    return dict
+    return weekends_dict
 
 
-def dict_update(dict):
+def dict_update(weekends_dict):
     """Функция перевода словаря с выходными в список
     с номерами выходных дней, считая от начала года"""
     lst_weekends = []
-    for i in dict:
-        for j in dict[i]:
+    for i in weekends_dict:
+        for j in weekends_dict[i]:
             a = int(dict_month[i])+int(j)
             lst_weekends.append(a)
     return lst_weekends
@@ -107,7 +107,7 @@ def convert_value(decision_date):
     html = get_html(url)
     content = get_content(html)
     dict = dict_update(content)
-    a = (data_vstupl(decision_date,dict))
+    a = (data_vstupl(decision_date, dict))
     return a
 
 
