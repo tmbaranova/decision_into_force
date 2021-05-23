@@ -1,57 +1,63 @@
 <!doctype html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="assets/css/main.css" />
     <script type="text/javascript" src="/eel.js"></script>
-    <title>Расчет вступления решения в силу</title>
+    <title>Калькулятор вступления в силу решения суда</title>
 </head>
 
-<body>
+<body class="is-preload">
 
-    <div class="container">
+		<!-- Header -->
+			<header id="header">
 
-        <div class="row">
+				<h1>TmB</h1>
 
-            <div class="col-md-6">
+			</header>
 
-                <h4>Дата решения</h4>
-                <hr>
-                <form>
-                    <div class="form-group">
-                        <input type="date"
-                         id="decision_date"
-                         class="form-control form-control-lg"
-                         placeholder="Введите дату">
-                    </div>
-                </form>
+		<!-- Page Wrapper -->
+
+                <section id="contact" class="main style3 secondary">
+				<div class="content">
+					<header><h2>Калькулятор вступления в силу решения суда</h2>
+						<p>Пятнадцать рабочих дней с даты решения суда первой инстанции</p>
+					</header>
+					<div class="box">
+						<form>
+							<div class="fields">
+                                <div class="field half"><p>Введите дату решения</p>    </div>
+								<div class="field half"><input type="date" name="name" id="decision_date"></div>
+                                <div class="field half"><p>Дата вступления в силу</p>    </div>
+								<div class="field half"><output class="form-control form-control-lg" id="result"></output></div>
+
+							</div>
+                            <ul class="actions special">
+                            <button id="btn-sum" type="button">Рассчитать</button>
+                                </ul>
+
+						</form>
+					</div>
+				</div>
+			</section>
+		<section  class="main style3 secondary">
+		</section>
 
 
-                          <h4 >Дата вступления в силу  </h4>
-                           <hr>
-                    <form>
-
-                        <div class="form-group">
-                            <output class="form-control form-control-lg"
-                                id="result"></output>
-
-                        </div>
-                </form>
 
 
-
-                   <hr>
-
-                <button id="btn-sum" class="btn btn-info btn-lg btn-block" type="button">Рассчитать</button>
-
-            </div>
-
-        </div>
-
-</div>
-
-    <script src="main.js"></script>
+<script src="main.js"></script>
+   <script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 </body>
 </html>
