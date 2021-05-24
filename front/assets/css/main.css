@@ -848,7 +848,9 @@ input, select, textarea {
 	input[type="tel"],
 	input[type="search"],
 	input[type="url"],
+	input[type="date"],
 	select,
+	output,
 	textarea {
 		-moz-appearance: none;
 		-webkit-appearance: none;
@@ -875,6 +877,8 @@ input, select, textarea {
 		input[type="tel"]:focus,
 		input[type="search"]:focus,
 		input[type="url"]:focus,
+		input[type="date"]:focus,
+		output:focus,
 		select:focus,
 		textarea:focus {
 			border-color: #9ac8e9;
@@ -886,6 +890,10 @@ input, select, textarea {
 	input[type="tel"],
 	input[type="search"],
 	input[type="url"],
+	input[type="date"],
+	output {
+	min-height: 3.5em;
+	}
 	select {
 		line-height: 1.35em;
 	}
