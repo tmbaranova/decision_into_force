@@ -24,6 +24,6 @@ http://www.consultant.ru/law/ref/calendar/proizvodstvennye/).
 Графический интерфейс и пример работы калькулятора
 <br>
 
-![Alt-текст](imgs/example.png "Пример работы калькулятора")
+![Alt-текст](imgs/калькулятор2.png "Пример работы калькулятора")
 
 

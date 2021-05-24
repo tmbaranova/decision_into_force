@@ -892,6 +892,7 @@ input, select, textarea {
 	input[type="url"],
 	input[type="date"],
 	output {
+	text-align: left;
 	min-height: 3.5em;
 	}
 	select {
