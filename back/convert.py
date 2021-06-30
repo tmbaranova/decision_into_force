@@ -32,7 +32,6 @@ def get_url(year):
 
 def get_html(url):
     """Функция, получающая html со страницы с календарем"""
-
     HEADERS = {
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
@@ -87,7 +86,6 @@ def data_vstupl(data, lst_weeks):
     while counter <= 15:
         date_int += 1
         if date_int > days_in_year:
-            """СЮДА ПАРСИНГ СЛЕДУЮЩЕГО ГОДА"""
             date_int = date_int % 365
             year += 1
             url = get_url(year)
